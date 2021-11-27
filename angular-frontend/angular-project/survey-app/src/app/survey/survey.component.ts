@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-survey',
@@ -17,7 +17,7 @@ export class SurveyComponent implements OnInit {
     { name: "sports", selected: false }
   ]
 
-  // constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -46,16 +46,17 @@ export class SurveyComponent implements OnInit {
       date: values.surveydate
     }
 
-    // console.log(body)
-    // let obs = this.http.post("http://3.19.123.200:30002/survey/submit", body)
+    console.log(body)
+    let obs = this.http.post("http://3.19.123.200:30002/survey/submit", body)
 
-    // obs.subscribe((response) => {
-    //   console.log(response)
-    //   alert("Thanks " + values.fname + ", your survey has been received")
-    // })
+    obs.subscribe((response) => {
+      console.log(response)
+      alert("Thanks " + values.fname + ", your survey has been received")
+    })
   }
 
   clearSurvey() {
-
+    
   }
+
 }

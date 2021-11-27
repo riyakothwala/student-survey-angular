@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-all-surveys',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllSurveysComponent implements OnInit {
 
-  // constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
   allSurveys = []
 
   ngOnInit(): void {
@@ -16,8 +16,8 @@ export class AllSurveysComponent implements OnInit {
   }
 
   getSurveyData() {
-    // let obs = this.http.get("http://3.19.123.200:30002/survey/all");
-    // obs.subscribe((response) => this.formatData(response))
+    let obs = this.http.get("http://3.19.123.200:30002/survey/all"); //TODO: Change ip!!!
+    obs.subscribe((response) => this.formatData(response))
   }
 
   formatData(survey) {
