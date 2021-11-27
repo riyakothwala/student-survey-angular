@@ -1,0 +1,25 @@
+/* @author Riya & Andrea */
+@charset "ISO-8859-1";
+
+textarea {
+	width: 30%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+strong {
+	width: 100%;
+	padding: 12px 12px 5px 0;
+	display: inline-block;
+	font-weight: bold;
+}
+
+.required {
+	color: red;
+}
+
+.invalidzip {
+	color: red;
+	font-style: italic;
+}

@@ -1,0 +1,50 @@
+/* @author Riya & Andrea */
+@charset "ISO-8859-1";
+
+h1 {
+	width: 100%;
+	background-color: #0d4d2d;
+	padding: 15px 15px 15px 15px;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	border: 5px solid #006633;
+	box-shadow: 10px 10px 35px #0d0e0d;
+}
+
+#survey {
+	width: 100%;
+	background-color: #FFCC33;
+	text-align: left;
+	color: black;
+}
+
+.footer {
+	background-color: #006633;
+}
+
+img {
+	float: right;
+	padding-right: 50px;
+}
+
+.survey-form {
+	font-weight: bold;
+	text-align: center;
+	font-size: x-large;
+	background-color: #FFCC33;
+}
+
+h3 {
+	padding-top: 0.5em;
+	padding-right: 1em;
+	padding-left: 1.5em;
+}
+
+li {
+	padding-top: 0.6em;
+	padding-right: 0.5em;
+	padding-bottom: 0.6em;
+	padding-left: 0.7em;
+	list-style: square inside;
+}
