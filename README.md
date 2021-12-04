@@ -1,7 +1,7 @@
 # 642 HW4 Andrea Howes & Riya Modi (student-survey-angular-restful)
 
 # Front-end
-Run `ng serve` to run angular app locally
+Run `ng serve` while in directory /student-survey-angular/angular-frontend/angular-project/survey-app to run angular app locally
 The app survey will appear at: http://localhost:4200/survey
 
 # Back-end
