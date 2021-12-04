@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-all-surveys',
@@ -16,7 +16,7 @@ export class AllSurveysComponent implements OnInit {
   }
 
   getSurveyData() {
-    let obs = this.http.get("http://3.19.123.200:30002/survey/all"); //TODO: Change ip!!!
+    let obs = this.http.get("http://localhost:8080/survey-service/webresources/students");
     obs.subscribe((response) => this.formatData(response))
   }
 
