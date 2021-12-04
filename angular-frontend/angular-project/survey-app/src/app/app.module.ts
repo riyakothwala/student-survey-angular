@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { SurveyComponent } from './survey/survey.component';
 import { AllSurveysComponent } from './all-surveys/all-surveys.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CompletedsurveyComponent } from './completedsurvey/completedsurvey.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SurveyComponent,
-    AllSurveysComponent
+    AllSurveysComponent,
+    CompletedsurveyComponent
   ],
   imports: [
     BrowserModule,
