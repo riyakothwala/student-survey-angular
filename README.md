@@ -62,6 +62,14 @@ URL: http://localhost:8080/survey-service/webresources/students
     "zip": "22180"
 }
 ```
+In case, the student details that user is trying to add already exist in the database table, it will returned the response with **409** status and error message properties.
+Example response, 
+```
+{
+    "errorMessage": "Student data already exists for id abcdef",
+    "status": "409"
+}
+```
 
 ### Get all student IDs. (GET)
 In order to get all student IDs, use http://localhost:8080/survey-service/webresources/students.
@@ -96,3 +104,16 @@ That will return student bean in the json format as the response (shown below).
     "zip": "22180"
 }
 ```
+In case, the requested student details do not exist in the database table, it will returned the response with **404** status and error message properties.
+Example response, 
+```
+{
+    "errorMessage": "Student data not found for id abcdefgggg",
+    "status": "404"
+}
+```
+
+---
+**GENERAL NOTE:**
+In the case of the server or service internal failure, it will always return a response with the **500** status and error message properties assciated with the failure. To be specific, the service will never return the exception stacktrace.
+---
