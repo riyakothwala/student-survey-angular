@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import edu.gmu.swe642.exception.DatabaseException;
+import edu.gmu.swe642.exception.GenericRuntimeException;
+import edu.gmu.swe642.exception.SQLExecutionException;
+
 /**
  * The DAO implementation to access the database and perform the operations.
  * 
@@ -35,17 +39,21 @@ public class StudentDAOImpl implements StudentDAO {
 			USER_NAME = prop.getProperty("db.user");
 			PASSWORD = prop.getProperty("db.password");
 
-		} catch (IOException ex) {
-			// TODO: handle scenario when failed to read file
-			ex.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new GenericRuntimeException("Trouble loading database credential file.");
 		}
 	}
 
 	@Override
-	public int insertStudent(StudentBean student) throws ClassNotFoundException {
-		int result = 0;
+	public StudentBean insertStudent(StudentBean student) {
 
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+			throw new DatabaseException("JDBC driver could not be loaded.");
+		}
 
 		try (Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);) {
 
@@ -71,83 +79,112 @@ public class StudentDAOImpl implements StudentDAO {
 			preparedStatement.setString(16, student.getData());
 			preparedStatement.setString(17, student.getSurveydate());
 
-			result = preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO: handle sql exception
 			e.printStackTrace();
+			throw new SQLExecutionException("Trouble executing SQL query.");
 		}
-		return result;
+		return student;
 	}
 
 	@Override
-	public List<String> getAllStudentIds() throws ClassNotFoundException {
-		List<String> studentIdList = new ArrayList<String>();
+	public List<String> getAllStudentIds() {
+		List<String> studentIdList = null;
 
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+			throw new DatabaseException("JDBC driver could not be loaded.");
+		}
 
 		try (Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD)) {
 
 			// Retrieve all student records
 			Statement s = connection.createStatement();
 			s.executeQuery("select * from students");
+
+			studentIdList = new ArrayList<String>();
+
 			ResultSet rs = s.getResultSet();
 			while (rs.next()) {
 				// Add records into data list
 				studentIdList.add(rs.getString("StudentId"));
 			}
 			rs.close();
-
 			s.close();
 		} catch (SQLException e) {
-			// TODO: handle sql exception
 			e.printStackTrace();
+			throw new SQLExecutionException("Trouble executing SQL query.");
 		}
 
 		return studentIdList;
 	}
 
 	@Override
-	public StudentBean getStudentById(String studentId) throws ClassNotFoundException {
-		StudentBean studentBean = new StudentBean();
+	public StudentBean getStudentById(String studentId) {
+		StudentBean studentBean = null;
 
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+			throw new DatabaseException("JDBC driver could not be loaded.");
+		}
 
 		try (Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD)) {
 
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("select * from students WHERE STUDENTID = ? AND ROWNUM = 1");
+			// Making results set scrollable in order to count number of records.
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"select * from students WHERE STUDENTID = ? AND ROWNUM = 1", ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
 			preparedStatement.setString(1, studentId);
 			preparedStatement.executeQuery();
 
 			ResultSet rs = preparedStatement.getResultSet();
-			while (rs.next()) {
-				// setting student bean from return
-				studentBean.setStudentId(studentId);
-				studentBean.setUserName(rs.getString("username"));
-				studentBean.setAddress(rs.getString("address"));
-				studentBean.setCity(rs.getString("city"));
-				studentBean.setStates(rs.getString("states"));
 
-				studentBean.setZip(rs.getString("zip"));
-				studentBean.setTelephone(rs.getString("telephone"));
-				studentBean.setEmail(rs.getString("email"));
-				studentBean.setUrl(rs.getString("url"));
-				studentBean.setcampuslikes(rs.getString("campuslikes"));
-				studentBean.setInterested(rs.getString("interested"));
-				studentBean.setnotes(rs.getString("notes"));
-				studentBean.setGradmonth(rs.getString("gradmonth"));
-				studentBean.setGradyear(rs.getString("gradyear"));
-				studentBean.setRecommend(rs.getString("recommend"));
-				studentBean.setData(rs.getString("data"));
-				studentBean.setSurveydate(rs.getString("surveydate"));
-
+			int rowCount = 0;
+			if (rs.last()) {// make cursor to point to the last row in the ResultSet object
+				rowCount = rs.getRow();
+				// make cursor to point to the front of the ResultSet object, just before the
+				// first row.
+				rs.beforeFirst();
 			}
+
+			if (rowCount == 0) {
+				return null;
+			}
+
+			// There shouldn't be more than one record as studentId is the primary key
+			rs.next();
+
+			// setting student bean from return
+			studentBean = new StudentBean();
+			studentBean.setStudentId(studentId);
+			studentBean.setUserName(rs.getString("username"));
+			studentBean.setAddress(rs.getString("address"));
+			studentBean.setCity(rs.getString("city"));
+			studentBean.setStates(rs.getString("states"));
+
+			studentBean.setZip(rs.getString("zip"));
+			studentBean.setTelephone(rs.getString("telephone"));
+			studentBean.setEmail(rs.getString("email"));
+			studentBean.setUrl(rs.getString("url"));
+			studentBean.setcampuslikes(rs.getString("campuslikes"));
+			studentBean.setInterested(rs.getString("interested"));
+			studentBean.setnotes(rs.getString("notes"));
+			studentBean.setGradmonth(rs.getString("gradmonth"));
+			studentBean.setGradyear(rs.getString("gradyear"));
+			studentBean.setRecommend(rs.getString("recommend"));
+			studentBean.setData(rs.getString("data"));
+			studentBean.setSurveydate(rs.getString("surveydate"));
+
 			preparedStatement.close();
 			rs.close();
 
 		} catch (SQLException e) {
-			// TODO: handle sql exception
 			e.printStackTrace();
+			throw new SQLExecutionException("Trouble executing SQL query.");
 		}
 
 		return studentBean;

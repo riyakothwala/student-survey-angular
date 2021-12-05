@@ -1,8 +1,9 @@
 package edu.gmu.swe642;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import edu.gmu.swe642.exception.StudentDataExistsException;
+import edu.gmu.swe642.exception.StudentDataNotFoundException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -11,6 +12,12 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+/**
+ * The student resource that handles requests and sends back the appropriate
+ * responses.
+ * 
+ * @author Riya & Andrea
+ */
 @Path("students")
 public class StudentResource {
 
@@ -19,13 +26,7 @@ public class StudentResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<String> getStudents() {
-
-		try {
-			return dao.getAllStudentIds();
-		} catch (ClassNotFoundException cnfe) {
-			return new ArrayList<String>();
-		}
-
+		return dao.getAllStudentIds();
 	}
 
 	@GET
@@ -33,20 +34,24 @@ public class StudentResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public StudentBean getStudent(@PathParam("studentId") String studentId) {
 
-		try {
-			return dao.getStudentById(studentId);
-		} catch (ClassNotFoundException cnfe) {
-			return null;
+		StudentBean studentBean = dao.getStudentById(studentId);
+		if (studentBean == null) {
+			throw new StudentDataNotFoundException("Student data not found for id " + studentId);
+		} else {
+			return studentBean;
 		}
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public int insertStudent(StudentBean studentBean) {
-		try {
+	@Produces(MediaType.APPLICATION_JSON)
+	public StudentBean insertStudent(StudentBean studentBean) {
+
+		StudentBean existingStudentBean = dao.getStudentById(studentBean.getStudentId());
+		if (existingStudentBean != null) {
+			throw new StudentDataExistsException("Student data already exists for id " + studentBean.getStudentId());
+		} else {
 			return dao.insertStudent(studentBean);
-		} catch (ClassNotFoundException cnfe) {
-			return -1;
 		}
 	}
 }

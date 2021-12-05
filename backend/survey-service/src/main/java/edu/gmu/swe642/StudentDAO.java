@@ -14,25 +14,22 @@ public interface StudentDAO {
 	 * 
 	 * @param student
 	 * @return
-	 * @throws ClassNotFoundException
 	 */
-	int insertStudent(StudentBean student) throws ClassNotFoundException;
+	StudentBean insertStudent(StudentBean student);
 
 	/**
 	 * Get all student IDs.
 	 * 
 	 * @return
-	 * @throws ClassNotFoundException
 	 */
-	List<String> getAllStudentIds() throws ClassNotFoundException;
+	List<String> getAllStudentIds();
 
 	/**
 	 * Get student by ID.
 	 * 
 	 * @param studentId
 	 * @return
-	 * @throws ClassNotFoundException
 	 */
-	StudentBean getStudentById(String studentId) throws ClassNotFoundException;
+	StudentBean getStudentById(String studentId);
 
 }
