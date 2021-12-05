@@ -30,7 +30,7 @@ export class SurveyComponent implements OnInit {
 
     var body = {
         "address": values.address,
-        "campuslikes": processedlike,
+        "campuslikes": processedlike.join(),
         "city": values.city,
         "email": values.email,
         "interested": values.interested,
