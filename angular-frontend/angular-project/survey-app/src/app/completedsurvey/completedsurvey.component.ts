@@ -11,6 +11,14 @@ export class CompletedsurveyComponent implements OnInit {
   isDataAvailable = false
   constructor(private http: HttpClient) { }
 
+  like = [
+    { name: "students", selected: false },
+    { name: "location", selected: false },
+    { name: "campus", selected: false },
+    { name: "atmosphere", selected: false },
+    { name: "dormrooms", selected: false },
+    { name: "sports", selected: false }
+  ]
   ngOnInit(): void {
     this.getStudentData()
   }
@@ -27,8 +35,21 @@ export class CompletedsurveyComponent implements OnInit {
   }
 
   loadData(studentData){
+    let likeArray = studentData.campuslikes.split(',')
+
+    this.like.forEach(individualLike => {
+      if(likeArray.includes(individualLike.name)){
+        individualLike.selected = true
+      }
+    });
+
+    console.log(this.like)
+
     this.survey = studentData
     console.log(this.survey)
     this.isDataAvailable = true
+  }
+  return(){
+    window.history.back();
   }
 }

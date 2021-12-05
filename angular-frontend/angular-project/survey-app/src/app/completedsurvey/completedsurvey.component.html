@@ -1,121 +1,194 @@
-
+<!-- @author Riya & Andrea -->
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<title>SWE 642 Student Survey HW4</title>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Form</title>
+
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+
+<!-- <link rel="stylesheet" href="../../jq/jquery-ui.css" type="text/css" /> -->
+<script src="../../jquery/jquery-3.6.0.js"></script>
+<script src="../../jq/jquery-ui.min.js"></script>
+</head>
+
+
 
 <body>
-  <div>
-    <h1>SWE 642 Student Survey HW4</h1>
-    <br>
-    <br>
-    <div *ngIf="isDataAvailable"> 
-    <form #surveyForm="ngForm" id="surveyform">
-      <label for="studentid">Student Id</label><br>
-      <input ngModel #fname="ngModel" id="studentid" type="text" name="studentid" placeholder="{{survey.studentId}}" required readonly>
+	<div style="text-align: right; font-style: italic;">Riya Modi</div>
+	<!-- computer science header -->
+	<div class="w3-large">
+		<h1>Computer Science Department</h1>
+	</div>
 
-      <!-- <label for="lname">Last Name</label><br>
-      <input ngModel #lname="ngModel" id="lname" type="text" name="lname" placeholder="Enter your last name" required>
-
-
-      <label for="streetaddr">Street Address</label><br>
-      <input ngModel #streetaddr="ngModel" id="streetaddr" type="text" name="streetaddress" placeholder="Enter your street address" required>
-
-      <div *ngIf="streetaddr.invalid && (surveyForm.submitted)" class="alert-danger">
-        <div [hidden]="!streetaddr.errors.required">
-           Street address is required.
-        </div>
+	<!-- Survey form header action="processForm" method="post" id="form-->
+	<h5 class="survey-form">Survey Form</h5>
+  <div *ngIf="isDataAvailable"> 
+    <form #surveyForm="ngForm" id="surveyform"  action="#" id="form"
+      class="w3-container w3-light-grey w3-text-black " autocomplete="on">
+      <div id="error"></div>
+      <!-- required field note  -->
+      <div style="padding-bottom: 20px; font-weight: bold;">
+        Note: <span class="required ">*</span> Required field
+      </div>
+      <div>
+        <strong>StudentId: <span class="required">* </span></strong> 
+        <input readonly ngModel #studentid="ngModel" id="studentid" class="w3-text " name="studentid" autofocus type="text " size="25 " placeholder={{survey.studentId}}/> 
+        <!-- <br> -->
       </div>
 
-      <label for="city">City</label><br>
-      <input ngModel #city="ngModel" id="city" type="text" name="city" placeholder="Enter your city" required>
-
-      <div *ngIf="city.invalid && (surveyForm.submitted)" class="alert-danger">
-        <div [hidden]="!city.errors.required">
-           City is required.
-        </div>
+      <div>
+        <strong>Username: <span class="required">*</span></strong> 
+        <input readonly ngModel #username="ngModel" id="username" class="w3-text " name="username" autofocus
+          type="text " size="25 " placeholder={{survey.userName}}/>
+      </div>
+      <div>
+        <strong>Street address: <span class="required">*</span></strong>
+        <!-- <br /> -->
+        <textarea readonly ngModel #address="ngModel" id="address" name="address" rows="5 " cols="40 "
+        placeholder={{survey.address}}></textarea>
       </div>
 
-      <label for="state">State</label><br>
-      <input ngModel #state="ngModel" id="state" type="text" name="state" placeholder="Enter your state" required>
 
-      <div *ngIf="state.invalid && (surveyForm.submitted)" class="alert-danger">
-        <div [hidden]="!state.errors.required">
-           State is required.
-        </div>
+      <div>
+        <strong>City:</strong> 
+        <input readonly ngModel #city="ngModel" name="city" type="text " size="25 " placeholder={{survey.city}} />
+      </div>
+      <div>
+        <strong>State:</strong> 
+        <input readonly ngModel #state="ngModel" name="state" type="text" size="25" placeholder={{survey.states}} />
+      </div>
+      <div>
+        <strong>Zip code:</strong> 
+        <input readonly ngModel #zip="ngModel" id="zip" name="zip" type="text" size="25 " placeholder={{survey.zip}} />
+        <!-- <span id="validateZip" class="invalidzip"></span> -->
       </div>
 
-      <label for="zip">Zip Code</label><br>
-      <input ngModel #zip="ngModel" id="zip" type="text" name="zip" placeholder="Enter your zip" required>
+      <div>
+        <strong>Telephone number:</strong> 
+        <input readonly ngModel #telephone="ngModel" type="tel" id="telephone" name="telephone" placeholder={{survey.telephone}} />
 
-      <div *ngIf="zip.invalid && (surveyForm.submitted)" class="alert-danger">
-        <div [hidden]="!zip.errors.required">
-           Zip Code is required.
-        </div>
       </div>
-
-      <label for="number">Phone Number</label><br>
-      <input ngModel #number="ngModel" id="number" type="text" name="number" placeholder="Enter your phone number (XXX)XXX-XXXX" required>
-
-      <div *ngIf="number.invalid && (surveyForm.submitted)" class="alert-danger">
-        <div [hidden]="!number.errors.required">
-           Phone number is required.
-        </div>
+      <div>
+        <strong>Email:<span class="required ">*</span></strong> 
+        <input readonly ngModel #email="ngModel" id="email" name="email" type="email" size="25" placeholder={{survey.email}} />
       </div>
-
-      <label for="email">Email</label><br>
-      <input ngModel #email="ngModel" id="email" type="text" name="email" placeholder="Enter your email" required>
-
-      <div *ngIf="email.invalid && (surveyForm.submitted)" class="alert-danger">
-        <div [hidden]="!email.errors.required">
-           Email is required.
-        </div>
+      <div>
+        <strong>URL:</strong> 
+        <input ngModel #url="ngModel" name="url" type="url" size="25" placeholder={{survey.url}} />
       </div>
+      <!-- <div>
+        <strong>Date:</strong><input name="surveydate" type="date " size="25"
+          placeholder="mm-dd-yyyy" />
+      </div> -->
 
-      <label for="date">Survey Date</label><br>
-      <input ngModel #date="ngModel" id="date" input type="date" name="surveydate" placeholder="Enter your survey date (MM/DD/YY)" required>
-
-      <div *ngIf="date.invalid && (surveyForm.submitted)" class="alert-danger">
-        <div [hidden]="!date.errors.required">
-           Date is required.
+      <!-- checkboxes -->
+      <!-- <p> -->
+        <label for="likemostbox">What do you like most about GMU?</label><br>
+        <div *ngFor="let liked of like">
+          <label>{{liked.name}}
+              <input readonly [checked]="liked.selected" class="w3-check" type="checkbox" >
+            </label>
         </div>
-      </div>
-
-      <br>
-      <br>
       
-      <label for="likemostbox">What do you like most about GMU?</label><br>
-      <div *ngFor="let liked of like">
-        <label>{{liked.name}}
-            <input name="likedmost" type="checkbox" [(ngModel)]="liked.selected">
-        </label>
-      </div>
-  
-      <label for="interest">How did you become interested in GMU?</label><br>
-      <input ngModel type="radio" name="interest" value="friends">Friends
-      <input ngModel type="radio" name="interest" value="television">Television
-      <input ngModel type="radio" name="interest" value="internet">Internet
-      <input ngModel type="radio" name="interest" value="others">Other
-      <br>
-      <br>
-      <label for="recommend">How likely are you to recommend GMU to other prospective students?</label><br>
-      <select ngModel id = "recommend" name="options">
-        <option value="Very Likely">
-          Very Likely
-        </option>
-        <option value="Likely">
-          Likely
-        </option>
-        <option value="Unlikely">
-          Unlikely
-        </option>
-      </select>
-     
-      <button type="submit">Submit Student Survey</button>
-      <button (click)="clearSurvey()">Cancel</button> -->
+        <!-- <strong>What you liked most about the campus: <span
+          class="required">*</span></strong><br /> 
+        <label> <input ngModel
+          class="w3-check " name="campuslikes" type="checkbox"
+          value="Students" /> Students
+        </label><br /> 
+        <label> <input ngModel class="w3-check " name="campuslikes"
+          type="checkbox" value="Location" /> Location
+        </label><br /> <label> <input ngModel class="w3-check " name="campuslikes"
+          type="checkbox" value="Campus" /> Campus
+        </label><br /> <label> <input ngModel class="w3-check " name="campuslikes"
+          type="checkbox" value="Atmosphere" /> Atmosphere
+        </label><br /> <label> <input ngModel class="w3-check " name="campuslikes"
+          type="checkbox" value="Dorm rooms" /> Dorm rooms
+        </label><br /> <label> <input ngModel class="w3-check " name="campuslikes"
+          type="checkbox" value="Sports" /> Sports
+        </label> -->
+      <!-- </p> -->
 
+      <!-- radio buttons  -->
+      <p>
+        <strong>How they became interested in the university: <span
+          class="required">*</span></strong><br /> <label> 
+            <input ngModel id="radiobutton" class="w3-radio" name="interested" type="radio" value="friends" /> Friends
+        </label><br /> <label>
+          <input ngModel id="radiobutton1" class="w3-radio" name="interested" type="radio" value="television" /> Television </label><br />
+        <label>
+          <input ngModel id="radiobutton2" class="w3-radio" name="interested" type="radio" value="internet" /> Internet </label><br />
+
+        <label>
+          <input ngModel id="radiobutton3" class="w3-radio "
+          name="interested" type="radio" value="other " /> Other </label><br />
+      </p>
+
+      <!-- comment box -->
+      <div>
+        <strong>Comments: </strong>
+        <textarea class=" w3-text " class="w3-textarea " name="notes"
+          rows="5 " cols="40 " placeholder="notes "></textarea>
+      </div>
+
+      <!-- graduation month and year  -->
+      <div style="padding-bottom: 20px;">
+        <strong for="browser ">High-school garduation:</strong> <input
+          list="months" name="gradmonth" id="gradmonth"
+          placeholder="select month">
+        <datalist id="months">
+          <option value="January"></option>
+          <option value="February"></option>
+          <option value="March"></option>
+          <option value="April"></option>
+          <option value="May"></option>
+          <option value="June"></option>
+          <option value="July"></option>
+          <option value="August"></option>
+          <option value="September"></option>
+          <option value="October"></option>
+          <option value="November"></option>
+          <option value="December"></option>
+        </datalist>
+        <input style="margin-left: 10px;" class=" " type="text"
+          name="gradyear" placeholder="year" />
+      </div>
+
+      <!-- School recommendation  -->
+      <div style="padding-bottom: 20px;">
+        <strong> Recommend this school to other: </strong> <select
+          name="recommend" id="recommend">
+          <option value="Very-Likely">Very Likely</option>
+          <option value="Likely">Likely</option>
+          <option value="Unlikely">Unlikely</option>
+        </select>
+      </div>
+
+      <div style="padding-bottom: 20px;">
+        <!-- onfocusout="doCalculations()" -->
+        <strong> Data: (At least ten comma separated numbers)<span
+          class="required">*</span></strong> <input id="data" class="w3-text"
+          type="text" name="data" />
+        <!-- <span id="dataerrors" class="invalidzip"></span> -->
+      </div>
+
+      <!-- <div style="padding-bottom: 20px;">
+        <label>Maximum:</label>
+        <output id="maximum" name="maximum"></output>
+      </div>
+
+      <div style="padding-bottom: 20px;">
+        <label>Average:</label>
+        <output id="average" name="average"></output>
+      </div> -->
+
+      <div style="padding-bottom: 20px;">
+        <button (click)="return()">Return to all surveys</button> 
+      </div>
     </form>
   </div>
-  </div>
+
 </body>
 </html>
 
