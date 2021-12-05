@@ -113,7 +113,4 @@ Example response,
 }
 ```
 
----
-**GENERAL NOTE:**
-In the case of the server or service internal failure, it will always return a response with the **500** status and error message properties assciated with the failure. To be specific, the service will never return the exception stacktrace.
----
+> **_NOTE:_** In the case of the server or service internal failure, it will always return a response with the **500** status and error message properties assciated with the failure. To be specific, the service will never return the exception stacktrace.
