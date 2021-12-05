@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-survey',
@@ -24,42 +23,25 @@ export class SurveyComponent implements OnInit {
 
   submitSurvey(values) {
 
-    console.log(values)
-
     var processedlike = this.like
       .filter(opt => opt.selected)
       .map(opt => opt.name);
     console.log(processedlike)
 
-    // var body = {
-    //   firstName: values.fname,
-    //   lastName: values.lname,
-    //   phoneNumber: values.number,
-    //   emailAddress: values.email,
-    //   street: values.streetaddress,
-    //   city: values.city,
-    //   zip: values.zip,
-    //   state: values.state,
-    //   custom_field_1: processedlike.toString(),
-    //   custom_field_2: values.interest,
-    //   custom_field_3: values.options,
-    //   date: values.surveydate
-    // }
     var body = {
-        "address": "hhvhvhu",
-        "campuslikes": "fairfax",
-        "city": "vienna",
-        "email": "sdfjdsnf",
-        "interested": "sdf",
-        "states": "va",
-        "studentId": "1abcdef",
-        "telephone": "21312312",
-        "url": "www.goo.com",
-        "userName": "rmodi",
-        "zip": "22180"
+        "address": values.address,
+        "campuslikes": processedlike,
+        "city": values.city,
+        "email": values.email,
+        "interested": values.interested,
+        "states": values.state,
+        "studentId": values.studentid,
+        "telephone": values.telephone,
+        "url": values.url,
+        "userName": values.username,
+        "zip": values.zip
     
     }
-
     console.log(body)
     let obs = this.http.post("http://localhost:8080/survey-service/webresources/students", body)
 
@@ -72,5 +54,89 @@ export class SurveyComponent implements OnInit {
   clearSurvey() {
     
   }
+
+  // $(function() {
+	// 	$("reset").click(function() {
+	// 		$("#form")[0].reset()
+	// 	});
+
+		
+		// $('#error').dialog({
+    //         modal: true,
+    //         autoOpen: false,
+    //         width: 'auto',
+    //         closeOnEscape: true,
+    //         show: {
+    //             effect: "blind",
+    //             // duration: 1000,
+    //         },
+    //         buttons: [{
+    //             text: "Close",
+    //             click: function() {
+    //                 $(this).dialog("close");
+    //             }
+    //         }],
+    //         title: "Validation Failed"
+    //     });
+		
+		
+		// Submit button click handler
+	// 	$("#form")
+	// 			.submit(
+	// 					function(event) {
+	// 						var errorMessage = "";
+
+	// 						var count = 0;
+	// 						if ($("#studentid").val() == ' '
+	// 							|| $("#studentid").val().match(
+	// 									/^[A-Za-z0-9_@]{3,8}$/) == null) {
+	// 						errorMessage += "<li>The studentId should be 3 to 8 characters long and contain only numeric,alphabets,underscore and @.</li>";
+	// 						count++;
+	// 					}
+	// 						var username = $("#username").val();
+	// 						// Name validation
+	// 						const alphabeticRegex = /^[A-Za-z]+$/;
+	// 						if (username == ' '
+	// 								|| username.match(alphabeticRegex) == null) {
+	// 							errorMessage += "<li>The Name text box should contain only Alphabets.</li>";
+	// 							count++;
+	// 						}
+	// 						// Address validation
+	// 						if ($("#address").val() == ' '
+	// 								|| $("#address").val().match(
+	// 										/^[ A-Za-z0-9]+$/) == null) {
+	// 							errorMessage += "<li>The address box should contain only numeric,alphabets or alphanumeric.</li>";
+	// 							count++;
+	// 						}
+	// 						// At least 2 checkboxes must be seleted
+	// 						if ($('input:checkbox').filter(':checked').length < 2) {
+	// 							errorMessage += "<li>Make sure at least two checkboxes are checked.</li>";
+	// 							count++;
+	// 						}
+	// 						// Radio button must be selected
+	// 						if ($("input[type = 'radio']:checked").length == 0) {
+	// 							errorMessage += "<li>Make sure at least one button is selected.</li>";
+	// 							count++;
+	// 						}
+	// 						// Email validation
+	// 						if (($("#email").val() == ' ' || $("#email")
+	// 								.val()
+	// 								.match(
+	// 										/^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/) == null)) {
+	// 							errorMessage += "<li>Invalid email.</li>";
+	// 							count++;
+	// 						}
+	// 						if(isDataValid()){
+	// 							errorMessage += "<li>Enter at least 10 numbers between 1 and 100 in data field separated by comma.</li>";
+	// 						}
+	// 						// Show modal dialog if validation fails.
+	// 						if (count > 0) {
+	// 							$("#error").html(errorMessage);
+	// 							$('#error').dialog('open');
+	// 							event.preventDefault();
+	// 						}
+							
+	// 					});
+	// });
 
 }

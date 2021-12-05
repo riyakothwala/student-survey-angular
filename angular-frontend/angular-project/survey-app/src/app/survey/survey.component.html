@@ -1,4 +1,203 @@
+<!-- @author Riya & Andrea -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Form</title>
 
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+
+<!-- <link rel="stylesheet" href="../../jq/jquery-ui.css" type="text/css" /> -->
+<script src="../../jquery/jquery-3.6.0.js"></script>
+<script src="../../jq/jquery-ui.min.js"></script>
+</head>
+
+
+
+<body>
+	<div style="text-align: right; font-style: italic;">Riya Modi</div>
+	<!-- computer science header -->
+	<div class="w3-large">
+		<h1>Computer Science Department</h1>
+	</div>
+
+	<!-- Survey form header action="processForm" method="post" id="form-->
+	<h5 class="survey-form">Survey Form</h5>
+
+	<form #surveyForm="ngForm" id="surveyform"  action="#" (ngSubmit)= "surveyForm.form.valid && submitSurvey(surveyForm.value)" id="form"
+		class=" w3-container w3-light-grey w3-text-black " autocomplete="on">
+		<div id="error"></div>
+		<!-- required field note  -->
+		<div style="padding-bottom: 20px; font-weight: bold;">
+			Note: <span class="required ">*</span> Required field
+		</div>
+		<div>
+			<strong>StudentId: <span class="required">* </span></strong> 
+      <input ngModel #studentid="ngModel" id="studentid" class="w3-text " name="studentid" autofocus type="text " size="25 " placeholder="student id "/> 
+      <!-- <br> -->
+		</div>
+
+		<div>
+			<strong>Username: <span class="required">*</span></strong> 
+      <input ngModel #username="ngModel" id="username" class="w3-text " name="username" autofocus
+				type="text " size="25 " placeholder="username " />
+		</div>
+		<div>
+			<strong>Street address: <span class="required">*</span></strong>
+      <!-- <br /> -->
+			<textarea ngModel #address="ngModel" id="address" name="address" rows="5 " cols="40 "
+				placeholder="address"></textarea>
+		</div>
+
+
+		<div>
+			<strong>City:</strong> 
+      <input ngModel #city="ngModel" name="city" type="text " size="25 " placeholder="city " />
+		</div>
+		<div>
+			<strong>State:</strong> 
+      <input ngModel #state="ngModel" name="state" type="text" size="25" placeholder="state " />
+		</div>
+		<div>
+			<strong>Zip code:</strong> 
+      <input ngModel #zip="ngModel" id="zip" name="zip" type="text" size="25 " placeholder="zip-code" />
+			<!-- <span id="validateZip" class="invalidzip"></span> -->
+		</div>
+
+		<div>
+			<strong>Telephone number:</strong> 
+      <input ngModel #telephone="ngModel" type="tel" id="telephone" name="telephone" placeholder="(###)-(###)-(####) " />
+
+		</div>
+		<div>
+			<strong>Email:<span class="required ">*</span></strong> 
+      <input ngModel #email="ngModel" id="email" name="email" type="email" size="25" placeholder="name@domain.com " />
+		</div>
+		<div>
+			<strong>URL:</strong> 
+      <input ngModel #url="ngModel" name="url" type="url" size="25" placeholder="https://www.name.com " />
+		</div>
+		<!-- <div>
+			<strong>Date:</strong><input name="surveydate" type="date " size="25"
+				placeholder="mm-dd-yyyy" />
+		</div> -->
+
+		<!-- checkboxes -->
+		<!-- <p> -->
+      <label for="likemostbox">What do you like most about GMU?</label><br>
+      <div *ngFor="let liked of like">
+        <label>{{liked.name}}
+            <input class="w3-check" name="likedmost" type="checkbox" [(ngModel)]="liked.selected">
+        </label>
+      </div>
+    
+			<!-- <strong>What you liked most about the campus: <span
+				class="required">*</span></strong><br /> 
+      <label> <input ngModel
+				class="w3-check " name="campuslikes" type="checkbox"
+				value="Students" /> Students
+			</label><br /> 
+      <label> <input ngModel class="w3-check " name="campuslikes"
+				type="checkbox" value="Location" /> Location
+			</label><br /> <label> <input ngModel class="w3-check " name="campuslikes"
+				type="checkbox" value="Campus" /> Campus
+			</label><br /> <label> <input ngModel class="w3-check " name="campuslikes"
+				type="checkbox" value="Atmosphere" /> Atmosphere
+			</label><br /> <label> <input ngModel class="w3-check " name="campuslikes"
+				type="checkbox" value="Dorm rooms" /> Dorm rooms
+			</label><br /> <label> <input ngModel class="w3-check " name="campuslikes"
+				type="checkbox" value="Sports" /> Sports
+			</label> -->
+		<!-- </p> -->
+
+		<!-- radio buttons  -->
+		<p>
+			<strong>How they became interested in the university: <span
+				class="required">*</span></strong><br /> <label> 
+          <input ngModel id="radiobutton" class="w3-radio" name="interested" type="radio" value="friends" /> Friends
+			</label><br /> <label>
+        <input ngModel id="radiobutton1" class="w3-radio" name="interested" type="radio" value="television" /> Television </label><br />
+			<label>
+        <input ngModel id="radiobutton2" class="w3-radio" name="interested" type="radio" value="internet" /> Internet </label><br />
+
+			<label>
+        <input ngModel id="radiobutton3" class="w3-radio "
+				name="interested" type="radio" value="other " /> Other </label><br />
+		</p>
+
+		<!-- comment box -->
+		<div>
+			<strong>Comments: </strong>
+			<textarea class=" w3-text " class="w3-textarea " name="notes"
+				rows="5 " cols="40 " placeholder="notes "></textarea>
+		</div>
+
+		<!-- graduation month and year  -->
+		<div style="padding-bottom: 20px;">
+			<strong for="browser ">High-school garduation:</strong> <input
+				list="months" name="gradmonth" id="gradmonth"
+				placeholder="select month">
+			<datalist id="months">
+				<option value="January"></option>
+				<option value="February"></option>
+				<option value="March"></option>
+				<option value="April"></option>
+				<option value="May"></option>
+				<option value="June"></option>
+				<option value="July"></option>
+				<option value="August"></option>
+				<option value="September"></option>
+				<option value="October"></option>
+				<option value="November"></option>
+				<option value="December"></option>
+			</datalist>
+			<input style="margin-left: 10px;" class=" " type="text"
+				name="gradyear" placeholder="year" />
+		</div>
+
+		<!-- School recommendation  -->
+		<div style="padding-bottom: 20px;">
+			<strong> Recommend this school to other: </strong> <select
+				name="recommend" id="recommend">
+				<option value="Very-Likely">Very Likely</option>
+				<option value="Likely">Likely</option>
+				<option value="Unlikely">Unlikely</option>
+			</select>
+		</div>
+
+		<div style="padding-bottom: 20px;">
+			<!-- onfocusout="doCalculations()" -->
+			<strong> Data: (At least ten comma separated numbers)<span
+				class="required">*</span></strong> <input id="data" class="w3-text"
+				type="text" name="data" />
+			<!-- <span id="dataerrors" class="invalidzip"></span> -->
+		</div>
+
+		<!-- <div style="padding-bottom: 20px;">
+			<label>Maximum:</label>
+			<output id="maximum" name="maximum"></output>
+		</div>
+
+		<div style="padding-bottom: 20px;">
+			<label>Average:</label>
+			<output id="average" name="average"></output>
+		</div> -->
+
+		<!-- submit and reset button -->
+		<div style="padding-bottom: 20px;">
+      <button type="submit" id="submit" type="submit">Submit Student Survey</button> 
+      <button (click)="clearSurvey()">Cancel</button>
+		</div>
+
+
+
+
+	</form>
+
+
+</body>
+</html>
+<!-- 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <title>SWE 642 Student Survey HW4</title>
@@ -127,4 +326,4 @@
   </div>
 </body>
 </html>
-
+ -->
