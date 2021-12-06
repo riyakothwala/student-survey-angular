@@ -31,7 +31,13 @@ export class CompletedsurveyComponent implements OnInit {
     const id = urlParams.get('id')
     const url = "http://localhost:8080/survey-service/webresources/students/"
     let obs = this.http.get(url + id);
-    obs.subscribe((response) => this.loadData(response))
+    obs.subscribe((response) => this.loadData(response),
+    (error) => {
+      console.log('oops', console.log(error.status))
+      if(error.status==404){
+      alert("Student data does not exists");
+      }
+    })
   }
 
   loadData(studentData){
