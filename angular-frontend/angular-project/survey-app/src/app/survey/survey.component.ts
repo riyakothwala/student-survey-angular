@@ -39,15 +39,20 @@ export class SurveyComponent implements OnInit {
         "telephone": values.telephone,
         "url": values.url,
         "userName": values.username,
-        "zip": values.zip
+        "zip": values.zip,
+		"data": values.data,
+		// "date": values.surveydate
     
     }
-    console.log(body)
     let obs = this.http.post("http://localhost:8080/survey-service/webresources/students", body)
 
     obs.subscribe((response) => {
       console.log(response)
-      alert("Thanks " + values.fname + ", your survey has been received")
+	  let mean = response["dataBean"]["mean"]
+	  let standardDev = response["dataBean"]["standardDev"]
+    //   alert("Thanks " + values.fname + ", your survey has been received")
+	   window.location.href = `http://localhost:4200/all?mean=${mean}&standardDev=${standardDev}`;
+
     })
   }
 

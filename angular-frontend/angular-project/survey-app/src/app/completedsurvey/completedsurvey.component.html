@@ -114,7 +114,7 @@
       </div>
 
       <!-- graduation month and year  -->
-      <div style="padding-bottom: 20px;">
+      <!-- <div style="padding-bottom: 20px;">
         <strong for="browser ">High-school garduation:</strong> <input
           list="months" name="gradmonth" id="gradmonth"
           placeholder="select month">
@@ -134,7 +134,7 @@
         </datalist>
         <input style="margin-left: 10px;" class=" " type="text"
           name="gradyear" placeholder="year" />
-      </div>
+      </div> -->
 
       <!-- School recommendation  -->
       <div style="padding-bottom: 20px;">
@@ -148,9 +148,9 @@
 
       <div style="padding-bottom: 20px;">
         <!-- onfocusout="doCalculations()" -->
-        <strong> Data: (At least ten comma separated numbers)<span
-          class="required">*</span></strong> <input id="data" class="w3-text"
-          type="text" name="data" />
+        <strong> Data: (At least ten comma separated numbers)
+          <span class="required">*</span></strong> 
+          <input id="data" class="w3-text" type="text" name="data" placeholder={{survey.data}} />
         <!-- <span id="dataerrors" class="invalidzip"></span> -->
       </div>
 

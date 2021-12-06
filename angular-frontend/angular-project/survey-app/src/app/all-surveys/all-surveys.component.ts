@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-all-surveys',
@@ -8,11 +9,20 @@ import { HttpClient} from '@angular/common/http';
 })
 export class AllSurveysComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute ) { 
+    
+  }
   allSurveys = []
+  mean = 0
+  standardDev = 0
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.mean = params['mean'];
+      this.standardDev = params['standardDev'];
+    });
     this.getSurveyData()
+    console.log("mean is: ", this.mean, "standard dev is: ", this. standardDev)
   }
 
   getSurveyData() {

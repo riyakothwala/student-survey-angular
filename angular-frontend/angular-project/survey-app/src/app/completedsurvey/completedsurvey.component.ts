@@ -43,7 +43,6 @@ export class CompletedsurveyComponent implements OnInit {
       }
     });
 
-    console.log(this.like)
 
     this.survey = studentData
     console.log(this.survey)

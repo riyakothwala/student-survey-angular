@@ -1,19 +1,13 @@
 
+<h1>
+<div *ngIf="mean > 90">
+  Congradulations winner!!! Mean: {{mean}} Standard Deviation: {{standardDev}}
+</div>
+<div *ngIf="mean <= 90"> Sorry, the mean was less than 90. Mean: {{mean}} Standard Deviation: {{standardDev}}</div>
+</h1>
 <table id="surveys">
     <tr>
         <th>Student Id</th>
-        <!-- <th>Username</th>
-        <th>Phone Number</th>
-        <th>Email</th>
-
-        <th>Street Address</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Zip</th>
-
-        <th>Url</th>
-        <th>Interests</th>
-        <th>Campus Likes</th> -->
 
     </tr>
 
@@ -21,20 +15,5 @@
       <td>
        <a href="completedsurvey?id={{survey}}">{{ survey }}</a>
       </td>
-      <!-- <td>{{ survey.userName }}</td>
-      
-      <td>{{ survey.telephone }}</td>
-      <td>{{ survey.email }}</td>
-
-      <td>{{ survey.address }}</td>
-      <td>{{ survey.city }}</td>
-
-      <td>{{ survey.states }}</td>
-      <td>{{ survey.zip }}</td>
-
-      <td>{{ survey.url }}</td>
-      <td>{{ survey.interested }}</td>
-
-      <td>{{ survey.campuslikes }}</td> -->
     </tr>
   </table>
