@@ -54,7 +54,7 @@ public class StudentResource {
 
 			// method on DataProcessor to compute mean and standard deviation
 			String inputDataString = studentBean.getData();
-			if (inputDataString != null) {
+			if (inputDataString != null && !inputDataString.isEmpty()) {
 				String[] inputNumbers = studentBean.getData().split(",");
 
 				DataProcessor processor = new DataProcessor();
