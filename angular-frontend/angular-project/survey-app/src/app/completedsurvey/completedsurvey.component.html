@@ -5,9 +5,7 @@
 <meta charset="ISO-8859-1">
 <title>Student Form</title>
 
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 
-<!-- <link rel="stylesheet" href="../../jq/jquery-ui.css" type="text/css" /> -->
 <script src="../../jquery/jquery-3.6.0.js"></script>
 <script src="../../jq/jquery-ui.min.js"></script>
 </head>
@@ -61,7 +59,6 @@
       <div>
         <strong>Zip code:</strong> 
         <input readonly ngModel #zip="ngModel" id="zip" name="zip" type="text" size="25 " placeholder={{survey.zip}} />
-        <!-- <span id="validateZip" class="invalidzip"></span> -->
       </div>
 
       <div>
@@ -77,13 +74,9 @@
         <strong>URL:</strong> 
         <input ngModel #url="ngModel" name="url" type="url" size="25" placeholder={{survey.url}} />
       </div>
-      <!-- <div>
-        <strong>Date:</strong><input name="surveydate" type="date " size="25"
-          placeholder="mm-dd-yyyy" />
-      </div> -->
+     
 
       <!-- checkboxes -->
-      <!-- <p> -->
         <label for="likemostbox">What do you like most about GMU?</label><br>
         <div *ngFor="let liked of like">
           <label>{{liked.name}}
@@ -113,29 +106,6 @@
           rows="5 " cols="40 " placeholder="notes "></textarea>
       </div>
 
-      <!-- graduation month and year  -->
-      <!-- <div style="padding-bottom: 20px;">
-        <strong for="browser ">High-school garduation:</strong> <input
-          list="months" name="gradmonth" id="gradmonth"
-          placeholder="select month">
-        <datalist id="months">
-          <option value="January"></option>
-          <option value="February"></option>
-          <option value="March"></option>
-          <option value="April"></option>
-          <option value="May"></option>
-          <option value="June"></option>
-          <option value="July"></option>
-          <option value="August"></option>
-          <option value="September"></option>
-          <option value="October"></option>
-          <option value="November"></option>
-          <option value="December"></option>
-        </datalist>
-        <input style="margin-left: 10px;" class=" " type="text"
-          name="gradyear" placeholder="year" />
-      </div> -->
-
       <!-- School recommendation  -->
       <div style="padding-bottom: 20px;">
         <strong> Recommend this school to other: </strong> <select
@@ -147,22 +117,10 @@
       </div>
 
       <div style="padding-bottom: 20px;">
-        <!-- onfocusout="doCalculations()" -->
         <strong> Data: (At least ten comma separated numbers)
           <span class="required">*</span></strong> 
           <input id="data" class="w3-text" type="text" name="data" placeholder={{survey.data}} />
-        <!-- <span id="dataerrors" class="invalidzip"></span> -->
       </div>
-
-      <!-- <div style="padding-bottom: 20px;">
-        <label>Maximum:</label>
-        <output id="maximum" name="maximum"></output>
-      </div>
-
-      <div style="padding-bottom: 20px;">
-        <label>Average:</label>
-        <output id="average" name="average"></output>
-      </div> -->
 
       <div style="padding-bottom: 20px;">
         <button (click)="return()">Return to all surveys</button> 
