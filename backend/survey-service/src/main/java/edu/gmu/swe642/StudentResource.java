@@ -51,6 +51,19 @@ public class StudentResource {
 		if (existingStudentBean != null) {
 			throw new StudentDataExistsException("Student data already exists for id " + studentBean.getStudentId());
 		} else {
+
+			// method on DataProcessor to compute mean and standard deviation
+			String inputDataString = studentBean.getData();
+			if (inputDataString != null) {
+				String[] inputNumbers = studentBean.getData().split(",");
+
+				DataProcessor processor = new DataProcessor();
+				DataBean dataBean = processor.computeMeanAndDeviation(inputNumbers);
+
+				// assign calculated mean value from processor.
+				studentBean.setDataBean(dataBean);
+			}
+
 			return dao.insertStudent(studentBean);
 		}
 	}

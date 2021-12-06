@@ -1,10 +1,13 @@
 package edu.gmu.swe642;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * The bean class to store derived mean and standard deviation.
  * 
  * @author Riya & Andrea
  */
+@XmlRootElement
 public class DataBean {
 	private Double mean;
 	private String standardDev;

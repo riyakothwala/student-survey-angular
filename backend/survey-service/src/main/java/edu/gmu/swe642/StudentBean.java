@@ -1,10 +1,13 @@
 package edu.gmu.swe642;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * The bean class to store survey form data.
  * 
  * @author Riya & Andrea
  */
+@XmlRootElement
 public class StudentBean {
 	private String StudentId;
 	private String UserName;
@@ -23,6 +26,7 @@ public class StudentBean {
 	private String gradyear;
 	private String recommend;
 	private String data;
+	private DataBean dataBean;
 	private String surveydate;
 
 	public String getStudentId() {
@@ -151,6 +155,14 @@ public class StudentBean {
 
 	public void setData(String data) {
 		this.data = data;
+	}
+
+	public DataBean getDataBean() {
+		return dataBean;
+	}
+
+	public void setDataBean(DataBean dataBean) {
+		this.dataBean = dataBean;
 	}
 
 	public String getSurveydate() {
