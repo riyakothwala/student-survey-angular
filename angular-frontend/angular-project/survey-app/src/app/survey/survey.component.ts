@@ -26,7 +26,7 @@ export class SurveyComponent implements OnInit {
     var processedlike = this.like
       .filter(opt => opt.selected)
       .map(opt => opt.name);
-    console.log(processedlike)
+    // console.log(processedlike)
 
     var body = {
         "address": values.address,
@@ -52,8 +52,15 @@ export class SurveyComponent implements OnInit {
 	  let standardDev = response["dataBean"]["standardDev"]
     //   alert("Thanks " + values.fname + ", your survey has been received")
 	   window.location.href = `http://localhost:4200/all?mean=${mean}&standardDev=${standardDev}`;
-
-    })
+    }, 
+	(error) => {
+		console.log('oops', console.log(error.status))
+		if(error.status==409){
+		alert("Student already exists. \nPlease enter different Student Id");
+		}
+	}
+	)
+	
   }
 
   clearSurvey() {
