@@ -1,4 +1,6 @@
 # 642 HW4 Andrea Howes & Riya Modi (student-survey-angular-restful)
+# Contributions:
+Andrea wrote most of the front-end. Riya made all backend changes and error handling for frontend. 
 
 # Front-end
 Run `ng serve` while in directory /student-survey-angular/angular-frontend/angular-project/survey-app to run angular app locally
