@@ -47,8 +47,9 @@ The default Tomcat web-address would be http://localhost:8080/
 
 ## Test
 ### Add Student. (POST)
-In order to add student details in the database table, pass student data (JSON format as below) in the request header using **POST** method.
+In order to add student details in the database table, pass student data (JSON format as below) in the request header using **POST** method. In the response, you get the same student details along with mean and standard deviation.
 URL: http://localhost:8080/survey-service/webresources/students
+Request:
 ```
 {
     "address": "hhvhvhu",
@@ -57,10 +58,32 @@ URL: http://localhost:8080/survey-service/webresources/students
     "email": "sdfjdsnf",
     "interested": "sdf",
     "states": "va",
-    "studentId": "abcdef",
+    "studentId": "riyatest",
     "telephone": "21312312",
     "url": "www.goo.com",
-    "userName": "rmodi",
+    "userName": "rmoditest",
+    "zip": "22180",
+    "data": "1,2,3,4,5,6,7,8,9,10"
+}
+```
+Response:
+```
+{
+    "address": "hhvhvhu",
+    "campuslikes": "fairfax",
+    "city": "vienna",
+    "data": "1,2,3,4,5,6,7,8,9,10",
+    "dataBean": {
+        "mean": 5.5,
+        "standardDev": "2.87"
+    },
+    "email": "sdfjdsnf",
+    "interested": "sdf",
+    "states": "va",
+    "studentId": "riyatest",
+    "telephone": "21312312",
+    "url": "www.goo.com",
+    "userName": "rmoditest",
     "zip": "22180"
 }
 ```
